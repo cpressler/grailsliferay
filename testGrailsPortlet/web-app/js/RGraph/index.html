@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <!--
+        /**
+        * o------------------------------------------------------------------------------o
+        * | This file is part of the RGraph package - you can learn more at:             |
+        * |                                                                              |
+        * |                          http://www.rgraph.net                               |
+        * |                                                                              |
+        * | This package is licensed under the RGraph license. For all kinds of business |
+        * | purposes there is a small one-time licensing fee to pay and for non          |
+        * | commercial  purposes it is free to use. You can read the full license here:  |
+        * |                                                                              |
+        * |                      http://www.rgraph.net/LICENSE.txt                       |
+        * o------------------------------------------------------------------------------o
+        */
+    -->
+
+    <title>RGraph: HTML5 Javascript charts library</title>
+    
+    <link rel="prerender" href="examples/index.html">
+    <link rel="prerender" href="docs/index.html">
+
+    <link rel="stylesheet" href="css/website.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RGraph: HTML5 Javascript charts library" href="http://www.rgraph.net/news.xml">
+
+    <RELEASE_SCRIPT_REMOVE id="scripts">
+        <!-- These get replaced by a single combined JS file -->
+        <script src="libraries/RGraph.common.effects.js" ></script>
+        <script src="libraries/RGraph.common.core.js" ></script>
+        <script src="libraries/RGraph.common.tooltips.js" ></script>
+        <script src="libraries/RGraph.common.key.js" ></script>
+        <script src="libraries/RGraph.common.dynamic.js" ></script>
+        <script src="libraries/RGraph.line.js" ></script>
+        <script src="libraries/RGraph.gauge.js" ></script>
+        <script src="libraries/RGraph.bar.js" ></script>
+    </RELEASE_SCRIPT_REMOVE>
+
+    <script src="libraries/jquery.min.js" ></script>
+    <!--[if lt IE 9]><script src="excanvas/excanvas.original.js"></script><![endif]-->
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <meta name="verify-v1" content="5y8rHGO/NPFDYU8jBgyT3qI7CSiEoPaeB+4x2TXan+4=" />
+    <meta name="msvalidate.01" content="4BB112FD663081BFCC94B1622BCF7222" />
+
+    <meta name="keywords" content="html5 javascript charts canvas graph rgraph line bar pie" />
+    <meta name="description" content="RGraph is a fast HTML5 canvas based javascript charts library" />
+    <meta name="googlebot" content="NOODP">
+    
+    <meta property="og:title" content="RGraph: HTML5 Javascript charts library" />
+    <meta property="og:description" content="A javascript charts library based on the HTML5 canvas tag. RGraph uses the HTML5 canvas tag to produce over 20 different kinds of charts. RGraph is free for non-commercial use" />
+    <meta property="og:image" content="http://www.rgraph.net/images/logo.png"/>
+    <meta property="fb:admins" content="825417645" />
+    
+    <!-- Place this tag in your head or just before your close body tag -->
+    <?php if (strpos($_SERVER['SERVER_NAME'], 'rgraph.net')) echo chr(60) . 'script src="https://apis.google.com/js/plusone.js"'.chr(62).chr(60).'/script'.chr(62); ?>
+    
+    <script>
+        function DrawLine ()
+        {
+            var myLine = new RGraph.Line('cvs',[4,6,12,16,8,4,2,8,18,16,14,16], [2,4,8,4,2,6,6,12,8,10,6,8]);
+            myLine.Set('chart.labels', ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
+            myLine.Set('chart.gutter.left', 40);
+            myLine.Set('chart.gutter.top', 35);
+            myLine.Set('chart.gutter.right', 15);
+            myLine.Set('chart.gutter.bottom', 20);
+            myLine.Set('chart.colors', ['red', 'black']);
+            myLine.Set('chart.units.post', '%');
+            myLine.Set('chart.linewidth', 7);
+            myLine.Set('chart.hmargin', 10);
+            myLine.Set('chart.text.color', '#333');
+            myLine.Set('chart.text.font', 'Arial');
+            myLine.Set('chart.background.grid.autofit', true);
+            myLine.Set('chart.background.grid.autofit.numvlines', 11);
+            myLine.Set('chart.shadow', true);
+            myLine.Set('chart.shadow.blur', 15);
+            myLine.Set('chart.shadow.offsetx', RGraph.isOld() ? 3 : 0);
+            myLine.Set('chart.shadow.offsety', RGraph.isOld() ? 3 : 0);
+
+
+            /**
+            * Use the Trace animation to show the chart
+            */
+            if (RGraph.isOld()) {
+                myLine.Draw();
+            } else {
+                myLine.Set('chart.tooltips', [
+                                              '<b>January</b><br />Started off the year quite averagely',
+                                              '<b>February</b><br />Better than January, rising quite nicely',
+                                              '<b>March</b><br />March was quite a spike',
+                                              '<b>April</b><br />Rising very impressively',
+                                              '<b>May</b><br />Dropping after the last two month spike',
+                                              '<b>June</b><br />Still dropping',
+                                              '<b>July</b><br />The fall is beginning to subside, but still dropping',
+                                              '<b>August</b><br />A good rise after the fall',
+                                              '<b>September</b><br />A very good peak',
+                                              '<b>October</b><br />The peak is now subsiding',
+                                              '<b>November</b><br />Still subsiding',
+                                              '<b>December</b><br />Rising again after the last fall',
+    
+    
+                                              '<b>January</b><br />Started off the year quite averagely as with Robert',
+                                              '<b>February</b><br />Rising as with Robert',
+                                              '<b>March</b><br />Not as good as Robert, but OK',
+                                              '<b>April</b><br />Dropping after the peak',
+                                              '<b>May</b><br />The low point as with last year',
+                                              '<b>June</b><br />Rising higher than Robert',
+                                              '<b>July</b><br />Consistent with last month',
+                                              '<b>August</b><br />A nice high point',
+                                              '<b>September</b><br />A low point',
+                                              '<b>October</b><br />A nice rise',
+                                              '<b>November</b><br />Falling for fall...',
+                                              '<b>December</b><br />Rising again for Christmas'
+                                             ]);
+                myLine.Set('chart.key', ['Roberts sales','Daniels sales']);
+                myLine.Set('chart.key.position', 'gutter');
+                myLine.Set('chart.key.position.y', 15);
+                myLine.Set('chart.key.position.gutter.boxed', false);
+                RGraph.Effects.Line.jQuery.Trace(myLine);
+                RGraph.Effects.Fade.In(myLine);
+            }
+                
+            var bar = new RGraph.Bar('cvs', [134,76]);
+            bar.Set('chart.gutter.left', 50);
+            bar.Set('chart.gutter.top', 35);
+            bar.Set('chart.gutter.right', 390);
+            bar.Set('chart.gutter.bottom', 170);
+            bar.Set('chart.colors', ['red', 'black']);
+            bar.Set('chart.colors.sequential', true);
+            bar.Set('chart.background.grid', false);
+            bar.Set('chart.noyaxis', true);
+            bar.Set('chart.ylabels', false);
+            bar.Set('chart.strokestyle', 'rgba(0,0,0,0)');
+            
+            // This custom click listener highlights the chart. The HighLightLine() function is below
+            //bar.Set('chart.events.click', HighLightLine);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /**
+            * This function highlights the line chart based on the bar that has been clicked
+            * 
+            * @param object e     The event object
+            * @param object shape The details of the shape that was clicked
+            *
+            function HighLightLine (e, shape)
+            {
+                var obj = shape['object'];
+                var index = shape['index'];
+
+                // First cover the canvas with a semi-opaque rect
+                obj.context.beginPath();
+                    obj.context.fillStyle = 'rgba(255,255,255,0.9)';
+                    obj.context.fillRect(myLine.Get('chart.gutter.left') + 1,myLine.Get('chart.gutter.top'),myLine.canvas.width - myLine.Get('chart.gutter.left') - myLine.Get('chart.gutter.right'), myLine.canvas.height - myLine.Get('chart.gutter.top') - myLine.Get('chart.gutter.bottom'));
+                obj.context.fill();
+                
+                // Get the original linewidth
+                obj.context.lineWidth = myLine.GetLineWidth(index),
+                
+                // Set the same shadow
+                RGraph.SetShadow(obj, obj.Get('chart.shadow.color'), 0, 0, 15);
+
+                // Draw the line using the coords2 array
+                obj.context.beginPath();
+                    myLine.context.strokeStyle = obj.Get('chart.colors')[index];
+                    for (var i=0; i<myLine.coords2[index].length; ++i) {
+                        if (i == 0) {
+                            obj.context.moveTo(myLine.coords2[index][i][0], myLine.coords2[index][i][1]);
+                        } else {
+                            obj.context.lineTo(myLine.coords2[index][i][0], myLine.coords2[index][i][1]);
+                        }
+                    }
+                obj.context.stroke();
+                
+                // Turn Off the shadow
+                RGraph.NoShadow(obj);
+            }
+            */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (RGraph.isOld()) {
+                bar.Draw();
+            } else {
+                bar.Set('chart.tooltips', ['Robert, overall, had a good year','Daniels year was OK']);
+                RGraph.Effects.Bar.Grow(bar);
+            }
+        }
+
+
+        function DrawGauge ()
+        {
+            var gauge = new RGraph.Gauge('gauge', -50, 50, 26);
+            gauge.Set('chart.value.text.units.post', 'mm');
+            gauge.Set('chart.tickmarks.small', 50);
+            gauge.Set('chart.tickmarks.medium', 5);
+            gauge.Set('chart.tickmarks.big', 5);
+            gauge.Set('chart.labels.count', 10);
+            gauge.Set('chart.colors.ranges', [[-50,-45,'red'], [-45,40,'yellow'], [-40,40, '#cfc'], [40,45, 'yellow'], [45,50,'red']]);
+            gauge.Set('chart.centerx', 125);
+            gauge.Set('chart.radius', 110);
+            gauge.Draw();
+
+
+            /**
+            * This is all the code that's necessary to make the Gauge interactive
+            */
+            gauge.canvas.addEventListener('mousedown', function (e)
+            {
+                var gauge = RGraph.ObjectRegistry.getObjectByXY(e);
+                gauge.value = gauge.getValue(e);
+                RGraph.Effects.Gauge.Grow(gauge);
+            }, false);
+        }
+        
+
+    
+        if (RGraph.isOld()) {
+            window.onload = function (e)
+            {
+                DrawGauge()
+                DrawLine();
+            }
+        } else {
+            window.addEventListener('DOMContentLoaded', function ()
+            {
+                DrawGauge();
+                DrawLine();
+            }, false)
+        }
+
+
+        /**
+        * Makes an AJAX call. It calls the given callback (a function) when ready
+        * 
+        * @param string   url      The URL to retrieve
+        * @param function callback A function object that is called when the response is ready, there's an example below
+        *                          called "myCallback".
+        */
+        function AjaxCall (url, callback)
+        {
+            // Mozilla, Safari, ...
+            if (window.XMLHttpRequest) {
+                var httpRequest = new XMLHttpRequest();
+            
+            // MSIE
+            } else if (window.ActiveXObject) {
+                var httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            httpRequest.onreadystatechange = callback;
+            
+            httpRequest.open('GET', url, true);
+            httpRequest.send();
+        }
+    </script>
+
+
+    <?php PrintAnalyticsCode() ?>
+</head>
+<body>
+
+    <!-- Social networking buttons -->
+        <?php
+            $prefix = substr($_SERVER['SERVER_NAME'], 0, 3);
+            require("/rgraph.{$prefix}/social.html");
+        ?>
+    <!-- Social networking buttons -->
+
+
+    <div id="title">
+        <div id="image">
+            <br />
+            <img src="images/logo.png" align="absmiddle" alt="RGraph: HTML5 Javascript charts library" width="64" height="64" style="position: relative; top: 15px" />
+        </div>
+        
+        <div id="text">
+            <h1 id="title">RGraph: <span>HTML5 Javascript charts library</span></h1>
+            <h4 style="font-weight: normal; position: relative; top: -15px; left: 10px; color: #444">
+                <i>Speed up your website with HTML5 canvas and Javascript charts</i>
+            </h4>
+        </div>
+
+        <div style="position: relative; left: 75px; top: -30px">
+            <a href="#download">
+                <img src="images/download-stable-sml.png" width="32" height="32" alt="Download the beta version" border="0" align="absmiddle" /> 
+                <b>Download the stable version</b>
+            </a>
+    
+            <a href="#download">
+                <img src="images/download-beta-sml.png" width="32" height="32" alt="Download the beta version" border="0" align="absmiddle" /> 
+                <b>Download the beta version</b> 
+            </a>
+            
+            &nbsp;
+        
+            <a href="http://www.rgraph.net/news.xml" target="_blank"><img src="images/rss_sml.png" border="0" style="box-shadow: 0 0 5px gray" width="25" height="13" title="Subscribe to the RGraph news XML feed" alt="Subscribe to the RGraph news XML feed" /></a>
+        </div>
+    </div>
+    <!-- END HEADER -->
+
+
+    <!-- TESTIMONIAL -->
+    <?php require_once('testimonial.html') ?>
+    <!-- TESTIMONIAL -->
+        
+        <canvas id="cvs" width="480" height="250" style="background-color: white; float: right">
+            <span style="color: red">[IE7+ is required to view the charts.]</span>
+        </canvas>
+
+        <h2>Faster <span>websites with RGraph charts</span></h2>
+        <p id="intro">
+            RGraph is a HTML5 Javascript charts library that supports over 20 different types of charts. Using the new HTML5 canvas tag,
+            RGraph creates these Javascript charts in the web browser, meaning quicker pages and less web server load. Using RGraph is
+            an easy way of speeding up your website.
+
+            <div>
+            
+                <div style="text-align: center; margin-top: 25px; margin-bottom: 25px">
+                    <div style="border: 3px solid #696; display: inline; border-radius: 15px; padding: 5px; background-color: #efe">
+                        <a href="examples/index.html" id="read-more"><b>Examples of charts</b></a>
+                    </div>
+                    
+                    &nbsp;
+                    
+                    <div style="border: 3px solid #696; display: inline; border-radius: 15px; padding: 5px; background-color: #efe">
+                        <a href="docs/index.html" id="read-more">Documentation and HTML5 examples</a>
+                    </div>
+                </div>
+            </div>
+        </p>
+
+        <h2>Free <span>to use!</span></h2>
+        <p>
+            RGraph is <b>free to use</b> on non-commercial websites such as personal blogs, educational,
+            charity or government websites - you don't need to buy a license.
+            <a href="docs/licensing.html">Go here for details about a commercial license.</a>
+        </p>
+    
+    <br clear="all" />
+
+
+    <h2>Many <span>different types of charts</span></h2>
+        <p>
+            RGraph supports 20+ chart types, including Bar charts, Line charts and Pie charts, with many having
+            variations available, such as the Line chart
+            with the X axis in the center.
+            Examples of all the charts are available from the <a href="examples/index.html">examples</a> page and there are more
+            in the documentation.
+        </p>
+
+    <h2>Feature <span>packed and fully documented</span></h2>
+        <p>
+            As you'll see from the <a href="docs/index.html">documentation</a> RGraph has lots of features, such as tooltips,
+            visual effects, zooming, context menus, interactive adjusting and resizing to name a few. You can combine charts such as the Line and
+            Bar chart and as of the next release you'll be able to combine more types of charts with more dynamic features.            
+        </p>
+        
+        <p>
+            All charts and features are documented with examples and code that you can use. The HOWTO guides walk you through
+            doing some common tasks step-by-step with more example code.
+        </p>
+        
+        <p>
+            The full source is included in the download and you're free to make changes to suit. The API is documented and there
+            is also a bare-bones implementation available if you want to extend RGraph and make your own charts.
+        </p>
+
+    <h2>Fast <span>support</span></h2>
+        <p>
+            Support is available by email (<a href="mailto:support@rgraph.net"><b>support@rgraph.net</b></a>) with responses typically
+            taking a matter of hours or less.
+        </p>
+
+    <div style="text-align: center; width: 250px; float: right">
+        <b>An adjustable Gauge</b>
+        <canvas id="gauge" width="250" height="250">[No canvas support]</canvas>
+    </div>
+
+    <h2>Javascript <span>dashboard solutions</span></h2>
+        <p>
+            RGraph supports a variety of Progress Bars and Meters which allow you to create rich dashboards for monitoring
+            your servers or applications. Types of meters include:
+        </p>
+        
+        <div style="width: 450px; background-color: red">
+            <ul style="float: left">
+                <li>Meters</li>
+                <li>Horizontal Progress Bars</li>
+                <li>Thermometers</li>
+                <li>Fuel Gauges</li>
+            </ul>
+            
+            <ul style="float: right">
+                <li>Gauges</li>
+                <li>Vertical Progress Bars</li>
+                <li>Odometers</li>
+            </ul>
+        </div>
+        
+        <br clear="all" />
+        
+        <p>
+            Most of the meters can be animated like the example on the right.
+        </p>
+
+        <br clear="all" />
+
+        <h2>Multiple <span>chart support</span></h2>
+            <p>
+                Thanks to something called the <b>ObjectRegistry</b> the 28th March 2012 stable release adds support for combining
+                multiple charts on a single canvas with those charts having dynamic features (eg tooltips or effects). To see what
+                can be achieved when combining charts take a look at these pages:
+            </p>
+            
+            <ul>
+                <li><a href="docs/combine.html">The combining charts docs page</a></li>
+                <li><a href="docs/resizing.html">The resizing docs page</a></li>
+                <li><a href="docs/howto-gauges.html">The HOWTO for combining Gauge charts</a></li>
+                <li><a href="docs/howto-combined-bar-vprogress.html">The HOWTO for combining the Bar chart with VProgress bars</a></li>
+            </ul>
+
+
+    <a name="download"></a>
+    <h2>Download <span>RGraph</span></h2>
+    
+    <?php if($_SERVER['SERVER_NAME'] == 'www.rgraph.net' OR $_SERVER['SERVER_NAME'] == 'www.rgraph.org' OR isset($_GET['showdownloadlinks'])): ?>
+        <div id="downloadlinks">
+
+            <p>
+                These are the latest full versions - not time-limited or branded trials. Note that the website is based on a recent
+                beta release. <a href="http://www.rgraph.net/news.xml" target="_blank"><b>Subscribe to the RSS feed</b></a> for news and pdates.
+            </p>
+        
+            <?php ShowDownloadLinks() ?>
+        </div>
+
+    <?php else: ?>
+
+        <span style="color: red">
+            [Only available on <a href="http://www.rgraph.net#download">http://www.rgraph.net</a>]
+        </span>
+    <?php endif ?>
+
+    
+    <script>
+        /**
+        * Hide the download links if not online
+        */
+        if (location.host != 'www.rgraph.net' && location.host != 'www.rgraph.org' && location.host != 'dev.rgraph.net') {
+            var downloadlinks = document.getElementById("downloadlinks");
+            
+            if (downloadlinks) {
+                document.getElementById("downloadlinks").style.display = 'none';
+            }
+        }
+    </script>
+
+
+
+    <br clear="all" />
+
+
+
+    <?php if ($_SERVER['SERVER_NAME'] != 'www.rgraph.net'): ?>
+        <p style="text-align: left">
+            <a href="http://www.rgraph.net" target="_blank"> &laquo; Keep up-to-date at the RGraph website</a>
+        </p>
+    <?php endif ?>
+    
+    <div id="rgraph"></div>
+
+    <script>
+        if (location.host.match(/^dev\.rgraph/)) {
+            document.getElementById("rgraph").innerHTML = '<div id="devtag">DEVELOPMENT<br /><a href="http://www.rgraph.net">Go to the live version &raquo;</a></div>';
+        }
+        
+    </script>
+    
+
+</body>
+</html><!-- 2012-03-28 -->
